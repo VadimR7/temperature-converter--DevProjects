@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState } from 'react';
+import {
+  FlexContainer,
+  PaperContainer,
+  GridContainer,
+} from './styles/AppStyle';
+import setConvertorTypesForSelect from './functions/setConvertorTypesForSelect';
+import convertDataToArray from './functions/convertDataToArray';
+import ConverterTypeSelect from './containers/ConverterTypeSelect';
+import ConvertModule from './components/ConvertModule';
+
+const convertModules = convertDataToArray();
+const initStateForSelect = setConvertorTypesForSelect();
 
 function App() {
+  const [converterType, setConverterType] = useState(initStateForSelect[0]);
+  const selecOptions = useRef(initStateForSelect);
+
+  const handleConverterTypeChange = (e) => setConverterType(e);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <GridContainer>
+      <PaperContainer>
+        <ConverterTypeSelect
+          converterType={converterType}
+          onChange={handleConverterTypeChange}
+          value={converterType}
+          options={selecOptions.current}
+        />
+        <FlexContainer>
+          {convertModules.map((item, i) => {
+            return (
+              converterType === initStateForSelect[i] && (
+                <ConvertModule
+                  key={i}
+                  type={converterType.toLowerCase()}
+                  convertorData={item}
+                />
+              )
+            );
+          })}
+        </FlexContainer>
+      </PaperContainer>
+    </GridContainer>
   );
 }
 
