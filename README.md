@@ -6,8 +6,10 @@ Find the project requirements here: [Link shortener website](https://www.codemen
 Built with React
 
 ## Screenshots and demo
+https://modular-unit-converter.herokuapp.com/
 
 ## Installation
+You can add your own conversion types or add more measurements. Just add to the 'src/components/convertingData.js' file - a new conversion type, units and formulas for every unit or you can add new measurements to the existing ones. Your new coversion (or measurements) must meet the exact format as previuos ones in that file.
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
